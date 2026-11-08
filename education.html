@@ -20,14 +20,61 @@
       href="https://webmention.io/ryanklarhoelter.name/xmlrpc"
     />
 
+    <script>
+      (function () {
+        var media = window.matchMedia("(prefers-color-scheme: dark)");
+        function apply() {
+          var hour = new Date().getHours();
+          var night = hour >= 19 || hour < 7;
+          document.documentElement.classList.toggle(
+            "dark",
+            media.matches || night,
+          );
+        }
+        apply();
+        media.addEventListener("change", apply);
+        setInterval(apply, 60000);
+      })();
+    </script>
+
     <link href="normalize.css" rel="stylesheet" />
     <style>
+      :root {
+        --bg: #ffffff;
+        --text: #0f0f0f;
+        --link: #3572b0;
+        --visited: #5c9fad;
+        --rule: lightgray;
+        color-scheme: light;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #121212;
+          --text: #e6e6e6;
+          --link: #7fb0e6;
+          --visited: #8cc5d1;
+          --rule: #444;
+          color-scheme: dark;
+        }
+      }
+
+      :root.dark {
+        --bg: #121212;
+        --text: #e6e6e6;
+        --link: #7fb0e6;
+        --visited: #8cc5d1;
+        --rule: #444;
+        color-scheme: dark;
+      }
+
       html {
         font-size: 18px;
       }
 
       body {
-        color: #0f0f0f;
+        background-color: var(--bg);
+        color: var(--text);
         font-family: Arial;
         line-height: 1.6;
         margin-left: auto;
@@ -46,15 +93,15 @@
       h2 a:link,
       h1 a:visited,
       h2 a:visited {
-        color: #0f0f0f;
+        color: var(--text);
       }
 
       a:link {
-        color: #3572b0;
+        color: var(--link);
       }
 
       a:visited {
-        color: #5c9fad;
+        color: var(--visited);
       }
 
       img {
@@ -72,7 +119,7 @@
       }
 
       hr {
-        background-color: lightgray;
+        background-color: var(--rule);
         border: none;
         height: 1px;
       }
