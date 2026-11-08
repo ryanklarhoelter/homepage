@@ -22,17 +22,20 @@
 
     <script>
       (function () {
-        var media = window.matchMedia("(prefers-color-scheme: dark)");
-        function apply() {
+        var hasMatchMedia = typeof window.matchMedia === "function";
+        var darkQuery = hasMatchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+        var lightQuery = hasMatchMedia ? window.matchMedia("(prefers-color-scheme: light)") : null;
+        function isDark() {
+          if (darkQuery && darkQuery.matches) { return true; }
+          if (lightQuery && lightQuery.matches) { return false; }
           var hour = new Date().getHours();
-          var night = hour >= 19 || hour < 7;
-          document.documentElement.classList.toggle(
-            "dark",
-            media.matches || night,
-          );
+          return hour >= 19 || hour < 7;
+        }
+        function apply() {
+          document.documentElement.classList.toggle("dark", isDark());
         }
         apply();
-        media.addEventListener("change", apply);
+        if (darkQuery && darkQuery.addEventListener) { darkQuery.addEventListener("change", apply); }
         setInterval(apply, 60000);
       })();
     </script>
