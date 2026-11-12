@@ -23,11 +23,19 @@
     <script>
       (function () {
         var hasMatchMedia = typeof window.matchMedia === "function";
-        var darkQuery = hasMatchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
-        var lightQuery = hasMatchMedia ? window.matchMedia("(prefers-color-scheme: light)") : null;
+        var darkQuery = hasMatchMedia
+          ? window.matchMedia("(prefers-color-scheme: dark)")
+          : null;
+        var lightQuery = hasMatchMedia
+          ? window.matchMedia("(prefers-color-scheme: light)")
+          : null;
         function isDark() {
-          if (darkQuery && darkQuery.matches) { return true; }
-          if (lightQuery && lightQuery.matches) { return false; }
+          if (darkQuery && darkQuery.matches) {
+            return true;
+          }
+          if (lightQuery && lightQuery.matches) {
+            return false;
+          }
           var hour = new Date().getHours();
           return hour >= 19 || hour < 7;
         }
@@ -35,7 +43,9 @@
           document.documentElement.classList.toggle("dark", isDark());
         }
         apply();
-        if (darkQuery && darkQuery.addEventListener) { darkQuery.addEventListener("change", apply); }
+        if (darkQuery && darkQuery.addEventListener) {
+          darkQuery.addEventListener("change", apply);
+        }
         setInterval(apply, 60000);
       })();
     </script>
@@ -158,31 +168,13 @@
 
       <article class="note adr">
         <p>
-          I’m a <span class="role">software engineer</span> at the lifestyle
-          brand
-          <a href="https://company.marc-o-polo.com" class="org">Marc O’Polo</a>
-          and a climber. I was born in <span class="bday">1989</span> and I’m
-          based in <span class="locality">Rosenheim</span>.
+          I was born in <span class="bday">1989</span> and I’m based in
+          <span class="locality">Rosenheim</span>.
         </p>
       </article>
 
       <p>
-        We could connect on
-        <a
-          href="https://www.linkedin.com/in/ryanklarhoelter"
-          rel="me"
-          class="url"
-          title="Visit my LinkedIn profile"
-          >LinkedIn</a
-        >
-        or you could check if you find interesting
-        <a
-          href="https://medium.com/@ryank9r"
-          rel="me"
-          class="url"
-          title="Visit my Medium profile"
-          >articles of me</a
-        >. As a rock climber I have a profile on
+        As a rock climber I have a profile on
         <a
           href="http://www.instagram.com/ryanklarhoelter"
           rel="me"
@@ -214,9 +206,5 @@
 
       <p class="u-font-style-italic">Take care!</p>
     </main>
-
-    <nav class="u-margin-top-2em">
-      <a href="https://ryanklarhoelter.name/education">Education</a>
-    </nav>
   </body>
 </html>
